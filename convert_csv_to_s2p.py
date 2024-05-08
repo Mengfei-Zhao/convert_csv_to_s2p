@@ -92,8 +92,10 @@ def convert_csv_to_s2p(csv_filename):
     f.close()
 
     out_filename = "out.s2p"
-    os.remove(out_filename)
-    os.rename(output_filename, out_filename)
+    try:
+        os.rename(output_filename, out_filename)
+    except FileExistsError as e:
+        os.remove(out_filename)
     print("\nConversion done.\n\n")
     print("The out.s2p is the generated s2p file.\n")
 
